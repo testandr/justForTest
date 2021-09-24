@@ -8,5 +8,6 @@ public class test {
         );
         WebDriver driver = new ChromeDriver();
         driver.get("https://google.com");
+        driver.close();
     }
 }
