@@ -5,7 +5,7 @@ public class SetupBrowser {
 
     public static WebDriver ChromeDriverSetup(){
         System.setProperty(
-                "webdriver.chrome.driver", "src/main/resources/chromedriver.exe"
+                "webdriver.chrome.driver", "D:\\browser_drivers/chromedriver.exe"
         );
         WebDriver webDriver = new ChromeDriver();
         return webDriver;
