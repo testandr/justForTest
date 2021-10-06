@@ -132,6 +132,10 @@ public class homework {
 
     @Test
     @DisplayName("Позитивный сценарий создания новой заявки на расход")
+
+        /*
+         * Перед запуском нужно поменять в переменной info.appointmentText цифру на следующую
+         */
     void positiveCreateNewExpenseRequestTest(){
         driver.get(info.createExpenseRequestPage);
 
