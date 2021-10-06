@@ -1,14 +1,15 @@
 package Lesson5;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class ActionsExamplesTest {
     WebDriver driver;
@@ -44,10 +45,36 @@ public class ActionsExamplesTest {
                         driver.findElement(By.xpath("//label[.='Владелец']//ancestor::tr")))
                 .build()
                 .perform();
-        Thread.sleep(5000);
 
+        webDriverWait.until(driver -> driver.findElements(By.xpath("//thead[@class='grid-header']//th[contains(@class, 'sortable')]")))
+                .get(0).getText().equals("ВЛАДЕЛЕЦ");
+
+        List<WebElement> headers = driver.findElements(By.xpath("//thead[@class='grid-header']//th[contains(@class, 'sortable')]"));
+        Assertions.assertEquals("ВЛАДЕЛЕЦ",headers.get(0).getText());
+
+        Thread.sleep(5000);
     }
 
+    @Test
+    void checkRowColorChangeAfterCheckBoxClickTest(){
+        driver.get("https://crm.geekbrains.space/dashboard");
+        driver.findElement(By.xpath("//thead[@class='grid-header']//input")).click();
+        String elementColor = driver.findElement(By.xpath("//tbody[@class='grid-body']/tr[1]"))
+                .getCssValue("background-color");
+        Assertions.assertEquals(elementColor, "rgba(254, 250, 237, 1)");
+    }
+
+    @Test
+    void iframeTest() {
+        driver.get("https://crm.geekbrains.space/project/create/");
+
+        driver.switchTo()
+                .frame(driver.findElement(By.xpath("//iframe[contains(@id, 'crm_project_planning')]")));
+        driver.findElement(By.xpath("//body")).sendKeys("Test");
+        driver.switchTo().defaultContent();
+        driver.findElement(By.xpath("//input[@name='crm_project[name]']")).sendKeys("Test");
+
+    }
 
     @AfterEach
     void tearDown(){
