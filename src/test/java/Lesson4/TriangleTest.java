@@ -1,12 +1,11 @@
 package Lesson4;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static Lesson4.Functions.areaTriangle;
-import static Lesson4.Functions.isNumberEven;
+
 
 public class TriangleTest {
     @Test

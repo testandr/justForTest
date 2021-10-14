@@ -21,7 +21,6 @@ public class homework {
         System.setProperty(
                 "webdriver.chrome.driver", "D:\\browser_drivers/chromedriver.exe"
         );
-        WebDriver webDriver = new ChromeDriver();
     }
 
     @BeforeEach
