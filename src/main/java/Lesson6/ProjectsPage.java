@@ -26,17 +26,6 @@ public class ProjectsPage extends BaseView{
     @FindBy(xpath = "//table//tbody//td[contains(@class, 'grid-body-cell-name')]")
     public WebElement tableNameColumn;
 
-    @FindBy(xpath = "//div[contains(@class, 'btn filter-criteria-selector')]")
-    public WebElement filterSelector;
-
-    @FindBy(xpath = "//div[@class='value-field-frame']//input[@type='text']")
-    public WebElement nameFilterSearchField;
-
-    public ProjectsPage fillNameFilterSearchField(String lastName){
-        nameFilterSearchField.sendKeys(lastName);
-        return this;
-    }
-
     @FindBy(xpath = "//div[@class='value-field-frame']//button[@class='btn btn-primary filter-update']")
     public WebElement nameFilterUpdateButton;
 
@@ -47,17 +36,14 @@ public class ProjectsPage extends BaseView{
 
 
     public ProjectsPage checkIfProjectIsCreated(String projectName){
-        webDriverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(String.valueOf(tableNameColumn))));
-        List<WebElement> buttons = webDriver.findElements(By.xpath(String.valueOf(filterSelector)));
-        for (int i = 0; i < buttons.size(); i++){
-        if (buttons.get(i).getText().contains("Наименование")){
-            buttons.get(i).click();
-            }
-        }
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.valueOf(nameFilterSearchField))));
-        fillNameFilterSearchField(projectName);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@id, 'grid-crm-project-grid')]")));
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tbody[@class='grid-body']")));
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tbody[@class='grid-body']/tr/td")));
+        webDriver.findElement(By.xpath("//div[contains(text(), 'Наименование')]")).click();
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='value-field-frame']//input[@type='text']")));
+        webDriver.findElement(By.xpath("//div[@class='value-field-frame']//input[@type='text']")).sendKeys(projectName);
         nameFilterUpdateButtonClick();
-        webDriverWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(String.valueOf(tableLoader))));
+        waitForLoadersInvisibility();
         Assertions.assertEquals(tableNameColumn.getText(), projectName);
         return this;
     }
