@@ -57,10 +57,8 @@ public class CreateProjectPage extends BaseView{
 
     public CreateProjectPage contactPersonSelectorClick(){
         webDriverWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(String.valueOf(lockedContactPersonSelector))));
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@id, 's2id_crm_project_contactMain-uid')]")));
-//        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.valueOf(contactPersonSelector))));
-//        contactPersonSelector.click();
-        webDriver.findElement(By.xpath("//div[contains(@id, 's2id_crm_project_contactMain-uid')]")).click();
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@name='crm_project[contactMain]'][*]")));
+        contactPersonSelector.click();
         return this;
     }
 
@@ -147,11 +145,20 @@ public class CreateProjectPage extends BaseView{
     }
 
     @FindBy(xpath = "//button[@data-action='{\"route\":\"crm_project_update\",\"params\":{\"id\":\"$id\"}}']")
-    public WebElement createNewProjectButton;
+    public WebElement applyNewProjectButton;
 
-    public ProjectsPage createNewProjectButtonClick(){
-        createNewProjectButton.click();
-        return new ProjectsPage(webDriver);
+    public CreateProjectPage applyNewProjectButtonClick(){
+        waitForLoadersInvisibility();
+        applyNewProjectButton.click();
+        return this;
     }
 
+    @FindBy(xpath = "//button[@data-action='{\"route\":\"crm_project_index\"}']")
+    public WebElement saveAndCloseNewProjectButton;
+
+    public ProjectsPage saveAndCloseNewProjectButtonClick(){
+        waitForLoadersInvisibility();
+        saveAndCloseNewProjectButton.click();
+        return new ProjectsPage(webDriver);
+    }
 }

@@ -111,7 +111,7 @@ public class PageObjectTest {
         new ProjectsPage(webDriver)
                 .createProjectButtonClick();
         new CreateProjectPage(webDriver)
-                .fillProjectNameField("Autotest5")
+                .fillProjectNameField("Autotest0014")
                 .organizationSelectorClick()
                 .fillOrganizationSelectorSearchField("Alya")
                 .selectOrganization()
@@ -126,9 +126,11 @@ public class PageObjectTest {
                 .chooseOptionFromAdministrator("Applanatest Applanatest Applanatest")
                 .chooseOptionFromManager("Applanatest Applanatest Applanatest")
                 .checkboxSkipSpeedChecksClick()
-                .createNewProjectButtonClick();
+                .applyNewProjectButtonClick()
+                .saveAndCloseNewProjectButtonClick();
         new ProjectsPage(webDriver)
-                .checkIfProjectIsCreated("Autotest5");
+                .checkIfProjectIsCreated("Autotest0014");
+
     }
 
     @AfterEach
