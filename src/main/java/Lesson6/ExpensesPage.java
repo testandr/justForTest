@@ -1,6 +1,7 @@
 package Lesson6;
 
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +26,7 @@ public class ExpensesPage extends BaseView{
     @FindBy(xpath = "//tbody//td[contains(@class, 'grid-body-cell-description')]")
     public WebElement tableExpenseDescriptionRow;
 
+    @Step("Нажать на кнопку \"Создать заявку на расход\"")
     public CreateExpensePage createExpenseButtonClick(){
 //        webDriverWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(String.valueOf(pageLoader))));
 //        webDriverWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(String.valueOf(tableLoader))));
