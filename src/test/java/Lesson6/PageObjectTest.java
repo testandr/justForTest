@@ -1,5 +1,7 @@
 package Lesson6;
 
+
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,6 +51,7 @@ public class PageObjectTest {
     }
 
     @Test
+    @Description("Тест: Позитивный сценарий создания заявки на расход")
     void createExpenseRequestPositiveTest() throws InterruptedException {
         new LoginPage(webDriver)
                 .fillLogin("Applanatest1")
@@ -81,7 +84,7 @@ public class PageObjectTest {
                 .submitLogin();
         new MainPage(webDriver)
                 .navigationMenu.openNavigationSubMenuItems("Контрагенты");
-        new СounterpartiesSubMenu(webDriver)
+        new CounterpartiesSubMenu(webDriver)
                 .contactFacesButtonClick();
         new ContactsPage(webDriver)
                 .createContactButtonClick();
